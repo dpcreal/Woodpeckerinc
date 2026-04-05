@@ -1,65 +1,903 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const year = new Date().getFullYear();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <main id="top">
+        <header>
+          <div className="container nav">
+            <a href="#top" className="brand" aria-label="Woodpecker Inc Home">
+              <img
+                src="/images/Logo.png"
+                alt="Woodpecker Inc logo"
+                className="brand-logo"
+              />
+              <span>Woodpecker Inc</span>
+            </a>
+
+            <button
+              className="menu-toggle"
+              aria-label="Toggle menu"
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Menu
+            </button>
+
+            <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+              <a href="#about" onClick={() => setMenuOpen(false)}>
+                About
+              </a>
+              <a href="#services" onClick={() => setMenuOpen(false)}>
+                Services
+              </a>
+              <a href="#testimonials" onClick={() => setMenuOpen(false)}>
+                Reviews
+              </a>
+              <a href="/order.html">Order</a>
+
+              <div className="account-menu">
+                <button
+                  className="account-button"
+                  aria-label="Account menu"
+                  type="button"
+                  onClick={() => setAccountOpen(!accountOpen)}
+                >
+                  <span className="account-icon"></span>
+                </button>
+
+                <div className={`account-dropdown ${accountOpen ? "open" : ""}`}>
+                  <div className="account-status">Guest</div>
+                  <a href="/account.html?mode=signin">Sign in</a>
+                  <a href="/account.html?mode=signup">Create account</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+
+        <section className="hero">
+          <div className="container hero-grid">
+            <div>
+              <div className="tag">Custom. Handcrafted. Made for You.</div>
+              <h1>Custom wooden products, built for your space.</h1>
+              <p>
+                At Woodpecker Inc, we create custom-built wooden products
+                tailored to your style, needs, and space. Every order is made to
+                feel personal, practical, and uniquely yours.
+              </p>
+
+              <div className="hero-actions">
+                <a href="/order.html" className="btn btn-primary">
+                  Order Now
+                </a>
+                <a href="/account.html?mode=signin" className="btn btn-secondary">
+                  My Account
+                </a>
+              </div>
+
+              <div className="hero-stats">
+                <div className="stat">
+                  <strong>Custom Built</strong>
+                  <span>Made to order</span>
+                </div>
+                <div className="stat">
+                  <strong>Tailored Designs</strong>
+                  <span>Built around your needs</span>
+                </div>
+                <div className="stat">
+                  <strong>Order Tracking</strong>
+                  <span>Visible in your account</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-card">
+              <div
+                className="mockup"
+                role="img"
+                aria-label="Decorative brand panel for Woodpecker Inc"
+              >
+                <div className="mockup-title">
+                  <strong>Woodpecker Inc</strong>
+                  <span>Custom Built Woodwork</span>
+                </div>
+
+                <div className="mockup-panel">
+                  <strong className="panel-title">Built around your ideas</strong>
+                  <span className="panel-text">
+                    Sign in, place an order, and view your order history anytime
+                    from your account page.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="about">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <div className="tag">About us</div>
+                <h2>Custom woodwork designed around your needs</h2>
+                <p className="subtext">
+                  Woodpecker Inc creates custom wooden products for customers who
+                  want something personal, functional, and built specifically for
+                  them.
+                </p>
+              </div>
+            </div>
+
+            <div className="cards">
+              <article className="card">
+                <div className="icon">🪵</div>
+                <h3>Custom Craftsmanship</h3>
+                <p>
+                  Each wooden product is custom built with care, detail, and
+                  attention to your vision.
+                </p>
+              </article>
+
+              <article className="card">
+                <div className="icon">📦</div>
+                <h3>Tracked Orders</h3>
+                <p>
+                  Your requests are saved to your account so you can view
+                  previous orders in one place.
+                </p>
+              </article>
+
+              <article className="card">
+                <div className="icon">🤝</div>
+                <h3>Made to Order</h3>
+                <p>
+                  Customers order directly from us and receive wooden products
+                  built to match their needs.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="services">
+          <div className="container split">
+            <div className="panel">
+              <div className="tag">Services</div>
+              <h2 className="no-top-margin">What Woodpecker Inc offers</h2>
+              <p className="subtext">
+                We create custom-built wooden products designed for each
+                customer, whether they need something decorative, functional, or
+                completely one of a kind.
+              </p>
+
+              <div className="checklist">
+                <div className="check">
+                  <div className="check-badge">✓</div>
+                  <div>
+                    <strong>Custom Home Pieces</strong>
+                    <div className="check-text">
+                      Beautiful wooden products made to fit your home, style, and
+                      personal taste.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="check">
+                  <div className="check-badge">✓</div>
+                  <div>
+                    <strong>Functional Wooden Builds</strong>
+                    <div className="check-text">
+                      Built for everyday use with a focus on practicality,
+                      durability, and design.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="check">
+                  <div className="check-badge">✓</div>
+                  <div>
+                    <strong>One-of-a-Kind Orders</strong>
+                    <div className="check-text">
+                      Custom requests are shaped around what the customer wants,
+                      not a one-size-fits-all template.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="panel">
+              <div className="showcase" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="testimonials">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <div className="tag">Client feedback</div>
+                <h2>Why customers choose Woodpecker Inc</h2>
+                <p className="subtext">
+                  Our custom approach and easy account-based order tracking help
+                  set Woodpecker Inc apart.
+                </p>
+              </div>
+            </div>
+
+            <div className="testimonial-grid">
+              <article className="quote">
+                <p>
+                  “Woodpecker Inc delivered a custom piece that matched exactly
+                  what we had in mind.”
+                </p>
+                <strong>Happy Customer</strong>
+                <span>Custom Order</span>
+              </article>
+
+              <article className="quote">
+                <p>
+                  “The design felt personal, the quality was excellent, and the
+                  process was smooth from start to finish.”
+                </p>
+                <strong>Satisfied Client</strong>
+                <span>Wood Product Buyer</span>
+              </article>
+
+              <article className="quote">
+                <p>
+                  “It was nice being able to sign in and still see my earlier
+                  request later.”
+                </p>
+                <strong>Repeat Customer</strong>
+                <span>Account Holder</span>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div className="container footer-grid">
+            <div>
+              <strong>Woodpecker Inc</strong>
+              <br />
+              <span>
+                Managed by: Vishwak Gaddam, Aranjay R., and Varnav Nidikonda
+              </span>
+              <br />
+              <span>© {year} All rights reserved.</span>
+            </div>
+
+            <div className="footer-links">
+              <a href="#about">About</a>
+              <a href="#services">Services</a>
+              <a href="#testimonials">Reviews</a>
+              <a href="/account.html?mode=signin">Account</a>
+            </div>
+          </div>
+        </footer>
       </main>
-    </div>
+
+      <style jsx global>{`
+        :root {
+          --bg: #f7f5f2;
+          --surface: #ffffff;
+          --text: #1f2937;
+          --muted: #6b7280;
+          --primary: #7c4a22;
+          --primary-dark: #5f3617;
+          --border: #e5ded7;
+          --shadow: 0 16px 40px rgba(31, 41, 55, 0.08);
+          --radius: 22px;
+          --max: 1180px;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, "Segoe UI", sans-serif;
+          color: var(--text);
+          background: linear-gradient(180deg, #faf8f5 0%, #f7f5f2 100%);
+          line-height: 1.6;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        img {
+          max-width: 100%;
+          display: block;
+        }
+
+        .container {
+          width: min(100% - 2rem, var(--max));
+          margin: 0 auto;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.95rem 1.35rem;
+          border-radius: 999px;
+          font-weight: 800;
+          border: 1px solid transparent;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .btn-primary {
+          background: var(--primary);
+          color: #fff;
+          box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+          background: var(--primary-dark);
+          transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+          background: white;
+          color: var(--text);
+          border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+          border-color: var(--primary);
+          color: var(--primary);
+        }
+
+        .tag {
+          display: inline-block;
+          padding: 0.45rem 0.8rem;
+          border-radius: 999px;
+          background: rgba(124, 74, 34, 0.08);
+          color: var(--primary);
+          font-weight: 700;
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+        }
+
+        header {
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          backdrop-filter: blur(12px);
+          background: rgba(247, 245, 242, 0.82);
+          border-bottom: 1px solid rgba(229, 222, 215, 0.8);
+        }
+
+        .nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 74px;
+          gap: 1rem;
+          position: relative;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 0.85rem;
+          font-weight: 900;
+          letter-spacing: 0.02em;
+        }
+
+        .brand-logo {
+          width: 42px;
+          height: 42px;
+          object-fit: contain;
+          border-radius: 12px;
+          background: white;
+          padding: 4px;
+          box-shadow: var(--shadow);
+          flex-shrink: 0;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 1.2rem;
+          align-items: center;
+          color: var(--muted);
+          font-weight: 600;
+        }
+
+        .nav-links a:hover {
+          color: var(--primary);
+        }
+
+        .account-menu {
+          position: relative;
+          margin-left: 0.4rem;
+        }
+
+        .account-button {
+          width: 54px;
+          height: 54px;
+          border-radius: 50%;
+          border: 0;
+          background: #e3e3e3;
+          display: grid;
+          place-items: center;
+          cursor: pointer;
+          padding: 0;
+          transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .account-button:hover {
+          background: #dcdcdc;
+          transform: translateY(-1px);
+        }
+
+        .account-icon {
+          width: 28px;
+          height: 28px;
+          position: relative;
+          display: block;
+        }
+
+        .account-icon::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #9c9c9c;
+        }
+
+        .account-icon::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: 1px;
+          transform: translateX(-50%);
+          width: 26px;
+          height: 14px;
+          background: #9c9c9c;
+          border-radius: 50% 50% 45% 45% / 70% 70% 35% 35%;
+        }
+
+        .account-dropdown {
+          position: absolute;
+          top: calc(100% + 0.7rem);
+          right: 0;
+          min-width: 240px;
+          background: rgba(255, 255, 255, 0.98);
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          box-shadow: var(--shadow);
+          padding: 0.7rem;
+          display: none;
+          z-index: 120;
+          gap: 0.35rem;
+        }
+
+        .account-dropdown.open {
+          display: grid;
+        }
+
+        .account-status {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: var(--muted);
+          padding: 0.45rem 0.6rem 0.6rem;
+          border-bottom: 1px solid var(--border);
+          margin-bottom: 0.15rem;
+        }
+
+        .account-dropdown a {
+          border: 0;
+          background: transparent;
+          text-align: left;
+          font: inherit;
+          color: var(--text);
+          padding: 0.7rem 0.75rem;
+          border-radius: 12px;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        .account-dropdown a:hover {
+          background: #f7f5f2;
+          color: var(--primary);
+        }
+
+        .menu-toggle {
+          display: none;
+          background: white;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 0.6rem 0.85rem;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
+        .hero {
+          padding: 4rem 0 3.5rem;
+        }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.9fr;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.7rem, 5vw, 5rem);
+          line-height: 1.02;
+          margin: 0 0 1rem;
+          letter-spacing: -0.04em;
+        }
+
+        .hero p {
+          font-size: 1.08rem;
+          color: var(--muted);
+          max-width: 60ch;
+          margin: 0 0 1.4rem;
+        }
+
+        .hero-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.9rem;
+          margin-bottom: 1.6rem;
+        }
+
+        .hero-stats {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0.8rem;
+          max-width: 620px;
+        }
+
+        .stat {
+          background: rgba(255, 255, 255, 0.72);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          padding: 1rem;
+          box-shadow: var(--shadow);
+        }
+
+        .stat strong {
+          display: block;
+          font-size: 1.2rem;
+          margin-bottom: 0.15rem;
+        }
+
+        .stat span {
+          color: var(--muted);
+          font-size: 0.95rem;
+        }
+
+        .hero-card {
+          background: linear-gradient(180deg, #ffffff 0%, #f3ece5 100%);
+          border: 1px solid var(--border);
+          border-radius: 30px;
+          padding: 1.25rem;
+          box-shadow: var(--shadow);
+          overflow: hidden;
+        }
+
+        .mockup {
+          min-height: 520px;
+          border-radius: 22px;
+          background: radial-gradient(
+              circle at top right,
+              rgba(215, 184, 153, 0.58),
+              transparent 35%
+            ),
+            linear-gradient(135deg, #8a5228 0%, #5c3419 100%);
+          padding: 1.2rem;
+          position: relative;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+
+        .mockup-panel {
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 20px;
+          padding: 1rem;
+          backdrop-filter: blur(8px);
+          max-width: 320px;
+        }
+
+        .mockup-title {
+          position: absolute;
+          top: 1.2rem;
+          left: 1.2rem;
+          right: 1.2rem;
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .panel-title {
+          font-size: 1.15rem;
+          display: block;
+          margin-bottom: 0.4rem;
+        }
+
+        .panel-text {
+          color: rgba(255, 255, 255, 0.82);
+        }
+
+        .section {
+          padding: 4.4rem 0;
+        }
+
+        .section-head {
+          display: flex;
+          justify-content: space-between;
+          gap: 2rem;
+          align-items: end;
+          margin-bottom: 1.7rem;
+        }
+
+        .section h2 {
+          font-size: clamp(2rem, 4vw, 3rem);
+          margin: 0;
+          letter-spacing: -0.04em;
+        }
+
+        .section .subtext {
+          color: var(--muted);
+          max-width: 60ch;
+          margin: 0.75rem 0 0;
+        }
+
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1rem;
+        }
+
+        .card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          padding: 1.35rem;
+          box-shadow: var(--shadow);
+        }
+
+        .card .icon {
+          width: 52px;
+          height: 52px;
+          border-radius: 16px;
+          display: grid;
+          place-items: center;
+          background: rgba(124, 74, 34, 0.1);
+          color: var(--primary);
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .card h3 {
+          margin: 0 0 0.55rem;
+          font-size: 1.2rem;
+        }
+
+        .card p {
+          margin: 0;
+          color: var(--muted);
+        }
+
+        .split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.2rem;
+          align-items: stretch;
+        }
+
+        .panel {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 28px;
+          padding: 1.5rem;
+          box-shadow: var(--shadow);
+        }
+
+        .checklist {
+          display: grid;
+          gap: 0.85rem;
+          margin-top: 1.2rem;
+        }
+
+        .check {
+          display: flex;
+          gap: 0.8rem;
+          align-items: flex-start;
+          padding: 0.95rem 1rem;
+          border: 1px solid var(--border);
+          background: #fcfbfa;
+          border-radius: 18px;
+        }
+
+        .check-badge {
+          width: 28px;
+          height: 28px;
+          border-radius: 999px;
+          display: grid;
+          place-items: center;
+          background: rgba(124, 74, 34, 0.12);
+          color: var(--primary);
+          font-weight: 900;
+          flex-shrink: 0;
+          margin-top: 0.1rem;
+        }
+
+        .check-text {
+          color: var(--muted);
+        }
+
+        .showcase {
+          min-height: 380px;
+          border-radius: 24px;
+          background: radial-gradient(
+              circle at 20% 20%,
+              rgba(215, 184, 153, 0.6),
+              transparent 28%
+            ),
+            linear-gradient(160deg, #f2e4d4 0%, #d4b392 60%, #ac7340 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .showcase::before,
+        .showcase::after {
+          content: "";
+          position: absolute;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.34);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .showcase::before {
+          width: 220px;
+          height: 120px;
+          top: 24px;
+          left: 24px;
+        }
+
+        .showcase::after {
+          width: 180px;
+          height: 180px;
+          bottom: 24px;
+          right: 24px;
+        }
+
+        .testimonial-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1rem;
+        }
+
+        .quote {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 24px;
+          padding: 1.35rem;
+          box-shadow: var(--shadow);
+        }
+
+        .quote p {
+          margin: 0 0 1rem;
+          color: var(--muted);
+        }
+
+        .quote strong {
+          display: block;
+        }
+
+        .quote span {
+          color: var(--muted);
+          font-size: 0.95rem;
+        }
+
+        footer {
+          padding: 2rem 0 3rem;
+          color: var(--muted);
+        }
+
+        .footer-grid {
+          display: flex;
+          justify-content: space-between;
+          gap: 1.5rem;
+          align-items: center;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border);
+          flex-wrap: wrap;
+        }
+
+        .footer-links {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .no-top-margin {
+          margin-top: 0;
+        }
+
+        @media (max-width: 980px) {
+          .hero-grid,
+          .cards,
+          .split,
+          .testimonial-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .section-head,
+          .footer-grid {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .nav-links {
+            position: absolute;
+            top: 74px;
+            left: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            flex-direction: column;
+            align-items: flex-start;
+            display: none;
+          }
+
+          .nav-links.open {
+            display: flex;
+          }
+
+          .menu-toggle {
+            display: inline-flex;
+          }
+
+          .hero-stats {
+            grid-template-columns: 1fr;
+          }
+
+          .hero {
+            padding-top: 4rem;
+          }
+
+          .mockup {
+            min-height: 360px;
+          }
+        }
+      `}</style>
+    </>
   );
 }
